@@ -51,6 +51,8 @@ class PlayByPlayRequester:
         # Encode without safe '+', apparently the NBA likes unsafe url params.
         params_str = urllib.parse.urlencode(params, safe=':+')
 
+        # TODO - possible try catch here. Not sure why the json command fails
+        #           sometimes but it might just be a bad response
         response = requests.get(url=self.url, headers=headers, params=params_str).json()
 
         # pulling just the data we want
