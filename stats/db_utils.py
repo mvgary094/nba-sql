@@ -33,8 +33,11 @@ def insert_many(settings, table, rows):
     else:
         with settings.db.atomic():
             for row in chunked_rows:
-                table.insert_many(row).execute()
-
+                try:
+                    table.insert_many(row).execute()
+                except Exception as e:
+                    print("Insert_many error - e: ", e)
+                    print("Row: ", row[0])
 
 def __insert_many_sqlite(settings, table, rows):
     """

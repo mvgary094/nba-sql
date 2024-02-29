@@ -45,14 +45,14 @@ class PlayByPlay(Model):
     score = CharField(null=True)
     score_margin = CharField(null=True)
 
-    player1_id = ForeignKeyField(Player, index=True, null=True)
-    player1_team_id = ForeignKeyField(Team, index=True, null=True)
+    player1_id = IntegerField(null=True) #ForeignKeyField(Player, index=True, null=True)
+    player1_team_id = IntegerField(null=True) #ForeignKeyField(Team, index=True, null=True)
 
-    player2_id = ForeignKeyField(Player, index=True, null=True)
-    player2_team_id = ForeignKeyField(Team, index=True, null=True)
+    player2_id = IntegerField(null=True) #ForeignKeyField(Player, index=True, null=True)
+    player2_team_id = IntegerField(null=True) #ForeignKeyField(Team, index=True, null=True)
 
-    player3_id = ForeignKeyField(Player, index=True, null=True)
-    player3_team_id = ForeignKeyField(Team, index=True, null=True)
+    player3_id = IntegerField(null=True) #ForeignKeyField(Player, index=True, null=True)
+    player3_team_id = IntegerField(null=True) #ForeignKeyField(Team, index=True, null=True)
 
     class Meta:
         db_table = 'play_by_play'
