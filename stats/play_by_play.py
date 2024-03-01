@@ -21,6 +21,7 @@ PlayByPlay object requester and builder.
 
 import requests
 import urllib.parse
+import time
 
 from models import PlayByPlay
 from constants import headers
@@ -53,8 +54,20 @@ class PlayByPlayRequester:
 
         # TODO - possible try catch here. Not sure why the json command fails
         #           sometimes but it might just be a bad response
-        response = requests.get(url=self.url, headers=headers, params=params_str).json()
-
+        retries = 0
+        while retries < 4:
+            try:
+                resp = requests.get(url=self.url, headers=headers, params=params_str)
+                response = resp.json()
+                break
+            except Exception as e:
+                print("params_str: ", params_str)
+                print("Play by play exception: ", e)
+                print("response: ", resp)
+                print(f"retries {retries}, sleeping...")
+                time.sleep(20)
+                retries += 1
+                print("retrying...")
         # pulling just the data we want
         player_info = response['resultSets'][0]['rowSet']
 
